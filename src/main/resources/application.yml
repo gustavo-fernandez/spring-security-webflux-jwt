@@ -1,1 +1,10 @@
-
+spring:
+  cloud:
+    config:
+      label: master
+  profiles:
+    active: dev
+  application:
+    name: spring-application
+  config:
+    import: configserver:http://localhost:8888
