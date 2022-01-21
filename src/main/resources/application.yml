@@ -8,3 +8,6 @@ spring:
     name: spring-application
   config:
     import: configserver:http://localhost:8888
+springdoc:
+  api-docs:
+    path: /open-api/api-docs

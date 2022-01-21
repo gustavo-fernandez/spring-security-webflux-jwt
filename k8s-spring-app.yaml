@@ -5,7 +5,7 @@ metadata:
   name: spring-application
   labels:
     app: spring-application
-    version: "1.0.3"
+    version: "1.0.4"
 spec:
   type: ClusterIP
   ports:
@@ -21,7 +21,7 @@ metadata:
   name: spring-application
   labels:
     app: spring-application
-    version: "1.0.3"
+    version: "1.0.4"
 spec:
   replicas: 1
   selector:
@@ -31,11 +31,11 @@ spec:
     metadata:
       labels:
         app: spring-application
-        version: "1.0.3"
+        version: "1.0.4"
     spec:
       containers:
         - name: spring-application
-          image: "acrspring01.azurecr.io/spring-application:1.0.3"
+          image: "acrspring01.azurecr.io/spring-application:1.0.4"
           imagePullPolicy: Always
           envFrom:
             []
@@ -99,7 +99,7 @@ metadata:
   name: spring-application
   labels:
     app: spring-application
-    version: "1.0.3"
+    version: "1.0.4"
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/ssl-redirect: "false"

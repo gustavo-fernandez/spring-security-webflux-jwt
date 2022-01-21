@@ -1,5 +1,6 @@
 package com.example.springsecuritywebfluxjwt.config;
 
+import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 
 import lombok.extern.slf4j.Slf4j;
@@ -66,6 +67,9 @@ public class MySecurityConfig {
       .authorizeExchange()
       .pathMatchers(POST, "/api/login").permitAll()
       .pathMatchers("/actuator/**").permitAll()
+      .pathMatchers(GET, "/open-api/**").permitAll()
+      .pathMatchers(GET, "/swagger-ui.html").permitAll()
+      .pathMatchers(GET, "/webjars/swagger-ui/**").permitAll()
       .anyExchange().authenticated()
       .and()
       .build();
