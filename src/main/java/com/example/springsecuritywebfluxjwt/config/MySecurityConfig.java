@@ -65,6 +65,7 @@ public class MySecurityConfig {
       .httpBasic().disable()
       .authorizeExchange()
       .pathMatchers(POST, "/api/login").permitAll()
+      .pathMatchers("/actuator/**").permitAll()
       .anyExchange().authenticated()
       .and()
       .build();

@@ -5,7 +5,7 @@ metadata:
   name: spring-application
   labels:
     app: spring-application
-    version: "1.0.0"
+    version: "1.0.1"
 spec:
   type: LoadBalancer
   ports:
@@ -21,9 +21,9 @@ metadata:
   name: spring-application
   labels:
     app: spring-application
-    version: "1.0.0"
+    version: "1.0.1"
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: spring-application
@@ -31,11 +31,11 @@ spec:
     metadata:
       labels:
         app: spring-application
-        version: "1.0.0"
+        version: "1.0.1"
     spec:
       containers:
         - name: spring-application
-          image: "acrspring01.azurecr.io/spring-application:1.0.0"
+          image: "acrspring01.azurecr.io/spring-application:1.0.1"
           imagePullPolicy: Always
           envFrom:
             []
@@ -57,6 +57,35 @@ spec:
           args: [ "" ]
           resources:
             {}
+          startupProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+              httpHeaders:
+                - name: probe-type
+                  value: startup
+            failureThreshold: 3
+            periodSeconds: 4
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+              httpHeaders:
+                - name: probe-type
+                  value: liveness
+            initialDelaySeconds: 3
+            failureThreshold: 3
+            periodSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+              httpHeaders:
+                - name: probe-type
+                  value: readiness
+            initialDelaySeconds: 3
+            periodSeconds: 3
+            failureThreshold: 3
       volumes:
         - name: tz-config
           hostPath:
