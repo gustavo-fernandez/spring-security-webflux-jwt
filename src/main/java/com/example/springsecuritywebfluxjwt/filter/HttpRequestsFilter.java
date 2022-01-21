@@ -17,7 +17,8 @@ public class HttpRequestsFilter implements WebFilter {
         var request = ex.getRequest();
         String path = request.getPath().toString();
         String probeType = request.getHeaders().getFirst("probe-type");
-        log.info("Path: {}, probe-type: {}", path, probeType);
+        String requestId = request.getHeaders().getFirst("Request-Id");
+        log.info("Path: {}, probe-type: {}, Request-Id: {}", path, probeType, requestId);
         return ex;
       })
       .flatMap(ex -> chain.filter(ex));
